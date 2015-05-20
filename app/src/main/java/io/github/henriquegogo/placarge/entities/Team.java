@@ -1,5 +1,6 @@
 package io.github.henriquegogo.placarge.entities;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Team {
@@ -10,47 +11,33 @@ public class Team {
     private String shield;
     private String largeShield;
 
-    public Team(JSONObject teamJsonObject) {
+    public Team(JSONObject teamJsonObject) throws JSONException {
         this.teamJsonObject = teamJsonObject;
+
+        this.id = teamJsonObject.getLong("id");
+        this.hexColor = teamJsonObject.getString("color");
+        this.name = teamJsonObject.getString("name");
+        this.shield = teamJsonObject.getString("shield");
+        this.largeShield = teamJsonObject.getString("large_shield");
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public String getHexColor() {
         return hexColor;
-    }
-
-    public void setHexColor(String hexColor) {
-        this.hexColor = hexColor;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getShield() {
         return shield;
     }
 
-    public void setShield(String shield) {
-        this.shield = shield;
-    }
-
     public String getLargeShield() {
         return largeShield;
-    }
-
-    public void setLargeShield(String largeShield) {
-        this.largeShield = largeShield;
     }
 }

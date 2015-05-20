@@ -29,7 +29,6 @@ public class ConnectionProxy extends AsyncTask<String, Void, String> {
             urlConnection.setRequestMethod("GET");
             InputStream inputStream = urlConnection.getInputStream();
             responseString = getStringFromStream(inputStream);
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (ProtocolException e) {

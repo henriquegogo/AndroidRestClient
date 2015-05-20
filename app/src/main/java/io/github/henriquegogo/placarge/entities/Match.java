@@ -1,5 +1,6 @@
 package io.github.henriquegogo.placarge.entities;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Match {
@@ -13,71 +14,48 @@ public class Match {
     private String where;
     private String link;
 
-    public Match(JSONObject matchJsonObject) {
+    public Match(JSONObject matchJsonObject) throws JSONException {
         this.matchJsonObject = matchJsonObject;
+
+        this.id = matchJsonObject.getLong("id");
+        this.homeScore = matchJsonObject.getLong("home_team_score");
+        this.guestScore = matchJsonObject.getLong("guest_team_score");
+        this.date = matchJsonObject.getString("dt_of_match");
+        this.where = matchJsonObject.getString("where");
+        this.link = matchJsonObject.getString("link_of_match");
+        this.homeTeam = new Team(matchJsonObject.getJSONObject("home_team"));
+        this.guestTeam = new Team(matchJsonObject.getJSONObject("guest_team"));
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public Team getHomeTeam() {
         return homeTeam;
-    }
-
-    public void setHomeTeam(Team homeTeam) {
-        this.homeTeam = homeTeam;
     }
 
     public Team getGuestTeam() {
         return guestTeam;
     }
 
-    public void setGuestTeam(Team guestTeam) {
-        this.guestTeam = guestTeam;
-    }
-
     public long getHomeScore() {
         return homeScore;
-    }
-
-    public void setHomeScore(long homeScore) {
-        this.homeScore = homeScore;
     }
 
     public long getGuestScore() {
         return guestScore;
     }
 
-    public void setGuestScore(long guestScore) {
-        this.guestScore = guestScore;
-    }
-
     public String getDate() {
         return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public String getWhere() {
         return where;
     }
 
-    public void setWhere(String where) {
-        this.where = where;
-    }
-
     public String getLink() {
         return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
     }
 }
