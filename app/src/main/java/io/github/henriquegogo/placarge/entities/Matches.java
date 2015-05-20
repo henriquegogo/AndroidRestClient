@@ -4,11 +4,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Matches {
     private JSONObject matchesJsonObject;
-    public List<Match> matches;
+    public List<Match> matches = new ArrayList<>();
 
     public Matches(String json) throws JSONException {
         matchesJsonObject = new JSONObject(json);
