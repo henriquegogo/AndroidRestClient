@@ -13,7 +13,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements AsyncTaskResponse {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +27,20 @@ public class MainActivity extends ActionBarActivity {
         TextView mainTextContent = (TextView) findViewById(R.id.main_text_content);
         mainTextContent.setText("Mudança de tela chamada no método onStart");
 
-        new ConnectionProxy().execute("http://matchesjson.herokuapp.com/matches.json");
+        new ConnectionProxy(this).execute("http://matchesjson.herokuapp.com/matches.json");
+    }
+
+    @Override
+    public void onAsyncTaskFinish(String output) {
+
     }
 
     public class ConnectionProxy extends AsyncTask<String, Void, String> {
+        public AsyncTaskResponse asyncTaskResponse = null;
+
+        public ConnectionProxy(AsyncTaskResponse asyncTaskResponse) {
+            this.asyncTaskResponse = asyncTaskResponse;
+        }
 
         @Override
         protected String doInBackground(String... params) {
