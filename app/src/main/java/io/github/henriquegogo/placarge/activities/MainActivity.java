@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,19 +72,22 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view = convertView;
-            if (view == null) {
-                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view = inflater.inflate(R.layout.layout_match_item, null);
-            }
+            convertView = LayoutInflater.from(context).inflate(R.layout.layout_match_item, null);
 
             Match match = matches.get(position);
             if (match != null) {
-                TextView matchWhereTextView = (TextView) view.findViewById(R.id.matchWhereTextView);
+                TextView matchWhereTextView = (TextView) convertView.findViewById(R.id.matchWhereTextView);
                 matchWhereTextView.setText(match.getWhere());
             }
 
-            return view;
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d("ACAO", "clicou");
+                }
+            });
+
+            return convertView;
         }
     }
 }
