@@ -5,8 +5,6 @@ import android.test.InstrumentationTestCase;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import io.github.henriquegogo.placarge.entities.Match;
-
 public class MatchTest extends InstrumentationTestCase {
 
     public void testCreateMatchFromJSONObject() throws JSONException {

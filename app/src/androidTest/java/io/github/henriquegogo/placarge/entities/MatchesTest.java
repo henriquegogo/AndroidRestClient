@@ -2,7 +2,6 @@ package io.github.henriquegogo.placarge.entities;
 
 import android.test.InstrumentationTestCase;
 import org.json.JSONException;
-import io.github.henriquegogo.placarge.entities.Matches;
 
 public class MatchesTest extends InstrumentationTestCase {
 

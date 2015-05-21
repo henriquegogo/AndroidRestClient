@@ -5,8 +5,6 @@ import android.test.InstrumentationTestCase;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import io.github.henriquegogo.placarge.entities.Team;
-
 public class TeamTest extends InstrumentationTestCase {
     int ID = 1;
     String NAME = "Cruzeiro";
