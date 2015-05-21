@@ -1,4 +1,4 @@
-package io.github.henriquegogo.placarge;
+package io.github.henriquegogo.placarge.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 
+import io.github.henriquegogo.placarge.AsyncTaskResponse;
+import io.github.henriquegogo.placarge.ConnectionProxy;
+import io.github.henriquegogo.placarge.R;
 import io.github.henriquegogo.placarge.entities.Matches;
 
 

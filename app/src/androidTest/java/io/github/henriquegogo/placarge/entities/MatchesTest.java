@@ -1,4 +1,4 @@
-package io.github.henriquegogo.placarge;
+package io.github.henriquegogo.placarge.entities;
 
 import android.test.InstrumentationTestCase;
 import org.json.JSONException;
