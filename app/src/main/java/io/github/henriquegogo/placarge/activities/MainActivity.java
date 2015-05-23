@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
     }
 
     @Override
-    public void onAsyncTaskFinish(String output) throws JSONException {
+    public void onAsyncTaskFinish(String output) {
         List<Match> matches = new Matches(output).matches;
         showMatches(matches);
     }
