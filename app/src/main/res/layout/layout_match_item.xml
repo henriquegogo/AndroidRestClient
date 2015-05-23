@@ -7,19 +7,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/matchWhereTextView"
-        android:padding="30dp"
         android:textColor="#ff444444"
         android:text="Local"
         android:gravity="center_horizontal"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:paddingTop="30dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="30dp"
         android:textColor="#ff33aa00"
         android:text="ACOMPANHE EM TEMPO REAL"
         android:gravity="center_horizontal"
         android:textSize="13sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:paddingBottom="30dp" />
 </LinearLayout>

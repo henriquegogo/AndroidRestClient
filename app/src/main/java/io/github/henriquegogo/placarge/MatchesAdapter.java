@@ -33,13 +33,6 @@ public class MatchesAdapter extends ArrayAdapter<Match> {
             matchWhereTextView.setText(match.getWhere().toUpperCase());
         }
 
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("ACAO", "clicou");
-            }
-        });
-
         return convertView;
     }
 }
