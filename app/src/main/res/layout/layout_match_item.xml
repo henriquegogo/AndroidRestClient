@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" >
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Text"
         android:id="@+id/matchWhereTextView"
         android:padding="30dp"
-        android:textColor="#ff000000" />
+        android:textColor="#ff444444"
+        android:text="Local"
+        android:gravity="center_horizontal"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+        android:textColor="#ff33aa00"
+        android:text="ACOMPANHE EM TEMPO REAL"
+        android:gravity="center_horizontal"
+        android:textSize="13sp"
+        android:textStyle="bold" />
 </LinearLayout>

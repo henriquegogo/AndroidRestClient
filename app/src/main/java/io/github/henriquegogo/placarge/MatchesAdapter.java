@@ -30,7 +30,7 @@ public class MatchesAdapter extends ArrayAdapter<Match> {
         Match match = matches.get(position);
         if (match != null) {
             TextView matchWhereTextView = (TextView) convertView.findViewById(R.id.matchWhereTextView);
-            matchWhereTextView.setText(match.getWhere());
+            matchWhereTextView.setText(match.getWhere().toUpperCase());
         }
 
         convertView.setOnClickListener(new View.OnClickListener() {

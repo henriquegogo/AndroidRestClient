@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/matchesListView"
-        tools:listitem="layout_match_item" />
+        tools:listitem="layout_match_item"
+        android:background="#ffffffff" />
 
 </LinearLayout>
