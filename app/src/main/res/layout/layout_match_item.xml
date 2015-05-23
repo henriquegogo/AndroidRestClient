@@ -22,17 +22,20 @@
         android:paddingBottom="10dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ff444444"
             android:text="Home Team"
-            android:id="@+id/homeTeamName" />
+            android:id="@+id/homeTeamName"
+            android:gravity="right" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/homeShield" />
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/homeShield"
+            android:padding="2dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -60,13 +63,15 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/guestShield" />
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/guestShield"
+            android:padding="2dp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ff444444"
             android:text="Guest Team"

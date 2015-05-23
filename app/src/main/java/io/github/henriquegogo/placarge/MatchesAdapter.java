@@ -1,6 +1,8 @@
 package io.github.henriquegogo.placarge;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import io.github.henriquegogo.placarge.entities.Match;
@@ -40,9 +45,9 @@ public class MatchesAdapter extends ArrayAdapter<Match> {
             ImageView guestShield = (ImageView) convertView.findViewById(R.id.guestShield);
 
             matchWhereTextView.setText(match.getWhere().toUpperCase());
+
             homeTeamName.setText(match.getHomeTeam().getName());
             homeScore.setText(String.valueOf(match.getHomeScore()));
-
             guestTeamName.setText(match.getGuestTeam().getName());
             guestScore.setText(String.valueOf(match.getGuestScore()));
         }
