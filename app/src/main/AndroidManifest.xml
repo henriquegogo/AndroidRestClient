@@ -18,6 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activities.MatchPreviewActivity"
+            android:label="@string/title_activity_match_preview" >
+        </activity>
     </application>
 
 </manifest>

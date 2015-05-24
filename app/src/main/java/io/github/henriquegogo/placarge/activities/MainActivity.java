@@ -1,10 +1,11 @@
 package io.github.henriquegogo.placarge.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         matchesListView = (ListView) findViewById(R.id.matchesListView);
-        matchesListView.setOnItemClickListener(new OnClickMatchListener());
+        matchesListView.setOnItemClickListener(onClickMatchListener);
     }
 
     @Override
@@ -45,10 +46,13 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
         matchesListView.setAdapter(matchesAdapter);
     }
 
-    private static class OnClickMatchListener implements AdapterView.OnItemClickListener {
+    OnItemClickListener onClickMatchListener = new OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Log.d("ACAO", "Clicou no item " + position);
+            Match matchSelected = (Match) parent.getAdapter().getItem(position);
+            Intent intent = new Intent(getApplicationContext(), MatchPreviewActivity.class);
+            intent.putExtra(getString(R.string.MATCH_LINK), matchSelected.getLink());
+            startActivity(intent);
         }
-    }
+    };
 }
