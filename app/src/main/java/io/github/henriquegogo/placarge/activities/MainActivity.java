@@ -25,6 +25,7 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         matchesListView = (ListView) findViewById(R.id.matchesListView);
         matchesListView.setOnItemClickListener(onClickMatchListener);
     }

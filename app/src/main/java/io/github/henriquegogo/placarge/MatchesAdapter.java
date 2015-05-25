@@ -50,6 +50,9 @@ public class MatchesAdapter extends ArrayAdapter<Match> {
             homeScore.setText(String.valueOf(match.getHomeScore()));
             guestTeamName.setText(match.getGuestTeam().getName());
             guestScore.setText(String.valueOf(match.getGuestScore()));
+
+            new ImageDownloader(homeShield).execute(match.getHomeTeam().getShield());
+            new ImageDownloader(guestShield).execute(match.getGuestTeam().getShield());
         }
 
         return convertView;
