@@ -7,3 +7,5 @@
 /captures
 .idea
 test_servers/
+screenshot*
+.irb-history
