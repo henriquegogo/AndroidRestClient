@@ -9,6 +9,7 @@ Os testes de aceitação foram escritos com Calabash e Cucumber e estão listado
 Para executá-los é necessário instalar o calabash conforme as instruções em:
 https://github.com/calabash/calabash-android/blob/master/documentation/installation.md
 e ter previamente buildado a aplicação.
+Após as etapas acima concluídas, basta executar o script: ./runCalabashTests.sh
 
 Dos requisitos pedidos não foi realizado o item 5 por falta de tempo.
 
