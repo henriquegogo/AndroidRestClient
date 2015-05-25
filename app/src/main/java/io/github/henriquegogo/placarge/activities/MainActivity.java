@@ -3,6 +3,8 @@ package io.github.henriquegogo.placarge.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -20,6 +22,7 @@ import io.github.henriquegogo.placarge.entities.Matches;
 public class MainActivity extends ActionBarActivity implements AsyncTaskResponse {
     private ListView matchesListView;
     private List<Match> matches;
+    private MatchesAdapter matchesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +40,29 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_refresh) {
+            matchesAdapter.notifyDataSetChanged();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onAsyncTaskFinish(String output) {
         matches = new Matches(output).matches;
         showMatches(matches);
     }
 
     private void showMatches(List<Match> matches) {
-        MatchesAdapter matchesAdapter = new MatchesAdapter(getApplicationContext().getApplicationContext(), R.layout.layout_match_item, matches);
+        matchesAdapter = new MatchesAdapter(getApplicationContext().getApplicationContext(), R.layout.layout_match_item, matches);
         matchesListView.setAdapter(matchesAdapter);
     }
 
@@ -52,7 +71,7 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Match matchSelected = (Match) parent.getAdapter().getItem(position);
             Intent intent = new Intent(getApplicationContext(), MatchPreviewActivity.class);
-            intent.putExtra(getString(R.string.MATCH_LINK), matchSelected.getLink());
+            intent.putExtra(getString(R.string.match_link), matchSelected.getLink());
             startActivity(intent);
         }
     };

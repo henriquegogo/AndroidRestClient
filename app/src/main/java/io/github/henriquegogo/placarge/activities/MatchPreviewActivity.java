@@ -17,7 +17,7 @@ public class MatchPreviewActivity extends ActionBarActivity {
         getSupportActionBar().hide();
 
         Intent intent = getIntent();
-        String link = intent.getStringExtra(getString(R.string.MATCH_LINK));
+        String link = intent.getStringExtra(getString(R.string.match_link));
 
         webView = (WebView) findViewById(R.id.webView);
         webView.setHorizontalScrollBarEnabled(false);
