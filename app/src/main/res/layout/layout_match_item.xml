@@ -3,15 +3,31 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/matchWhereTextView"
-        android:textColor="#ff444444"
-        android:text="Local"
-        android:gravity="center_horizontal"
-        android:textSize="12sp"
-        android:paddingTop="15dp" />
+        android:paddingTop="15dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/matchWhere"
+            android:textColor="#ff444444"
+            android:text="Local"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/hourOfMatch"
+            android:textColor="#ff444444"
+            android:text="Horário"
+            android:textSize="12sp"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"

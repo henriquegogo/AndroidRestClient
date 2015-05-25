@@ -1,9 +1,6 @@
 package io.github.henriquegogo.placarge;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +9,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.security.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import io.github.henriquegogo.placarge.entities.Match;
@@ -36,7 +34,8 @@ public class MatchesAdapter extends ArrayAdapter<Match> {
 
         Match match = matches.get(position);
         if (match != null) {
-            TextView matchWhereTextView = (TextView) convertView.findViewById(R.id.matchWhereTextView);
+            TextView matchWhereTextView = (TextView) convertView.findViewById(R.id.matchWhere);
+            TextView hourOfMatch = (TextView) convertView.findViewById(R.id.hourOfMatch);
             TextView homeTeamName = (TextView) convertView.findViewById(R.id.homeTeamName);
             TextView homeScore = (TextView) convertView.findViewById(R.id.homeScore);
             ImageView homeShield = (ImageView) convertView.findViewById(R.id.homeShield);
@@ -45,6 +44,7 @@ public class MatchesAdapter extends ArrayAdapter<Match> {
             ImageView guestShield = (ImageView) convertView.findViewById(R.id.guestShield);
 
             matchWhereTextView.setText(match.getWhere().toUpperCase());
+            hourOfMatch.setText(getHourFromDateString(match.getDate()));
 
             homeTeamName.setText(match.getHomeTeam().getName());
             homeScore.setText(String.valueOf(match.getHomeScore()));
@@ -56,5 +56,20 @@ public class MatchesAdapter extends ArrayAdapter<Match> {
         }
 
         return convertView;
+    }
+
+    private String getHourFromDateString(String dateString) {
+        String hour = "";
+        SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        SimpleDateFormat outputDateFormat = new SimpleDateFormat("HH:mm");
+
+        try {
+            Date date = inputDateFormat.parse(dateString);
+            hour = outputDateFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return hour;
     }
 }
