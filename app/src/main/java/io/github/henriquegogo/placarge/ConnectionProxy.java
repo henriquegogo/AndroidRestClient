@@ -26,6 +26,8 @@ public class ConnectionProxy extends AsyncTask<String, Void, String> {
         try {
             URL url = new URL(urlString);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setDefaultUseCaches(true);
+            urlConnection.setUseCaches(true);
             urlConnection.setRequestMethod("GET");
             InputStream inputStream = urlConnection.getInputStream();
             responseString = getStringFromStream(inputStream);

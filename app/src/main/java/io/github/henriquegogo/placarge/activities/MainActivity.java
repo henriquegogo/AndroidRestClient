@@ -1,6 +1,8 @@
 package io.github.henriquegogo.placarge.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -20,6 +22,7 @@ import io.github.henriquegogo.placarge.entities.Match;
 import io.github.henriquegogo.placarge.entities.Matches;
 
 public class MainActivity extends ActionBarActivity implements AsyncTaskResponse {
+    public static final String MATCH_LINK_URL_STRING = "http://matchesjson.herokuapp.com/matches.json";
     private ListView matchesListView;
     private List<Match> matches;
     private MatchesAdapter matchesAdapter;
@@ -36,7 +39,7 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
     @Override
     protected void onStart() {
         super.onStart();
-        new ConnectionProxy(this).execute("http://matchesjson.herokuapp.com/matches.json");
+        new ConnectionProxy(this).execute(MATCH_LINK_URL_STRING);
     }
 
     @Override
@@ -48,7 +51,7 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_refresh) {
-            matchesAdapter.notifyDataSetChanged();
+            new ConnectionProxy(this).execute(MATCH_LINK_URL_STRING);
             return true;
         }
 
@@ -57,8 +60,21 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
 
     @Override
     public void onAsyncTaskFinish(String output) {
-        matches = new Matches(output).matches;
-        showMatches(matches);
+        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        String matchesCache = sharedPreferences.getString(String.valueOf(R.string.matches_cache), null);
+
+        if (output != null) {
+            SharedPreferences.Editor sharedPreferencesEditor = getPreferences(Context.MODE_PRIVATE).edit();
+            sharedPreferencesEditor.putString(getString(R.string.matches_cache), output);
+            sharedPreferencesEditor.apply();
+
+            matches = new Matches(output).matches;
+            showMatches(matches);
+        }
+        else if (matchesCache != null) {
+            matches = new Matches(matchesCache).matches;
+            showMatches(matches);
+        }
     }
 
     private void showMatches(List<Match> matches) {
@@ -71,7 +87,7 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Match matchSelected = (Match) parent.getAdapter().getItem(position);
             Intent intent = new Intent(getApplicationContext(), MatchPreviewActivity.class);
-            intent.putExtra(getString(R.string.match_link), matchSelected.getLink());
+            intent.putExtra(getString(R.string.match_link_label), matchSelected.getLink());
             startActivity(intent);
         }
     };
