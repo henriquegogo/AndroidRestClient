@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Matches {
     private JSONObject matchesJsonObject;
-    public List<Match> matches = new ArrayList<>();
+    private List<Match> matches = new ArrayList<>();
 
     public Matches(String json) {
         try {
@@ -25,8 +25,15 @@ public class Matches {
         }
     }
 
+    public List<Match> getMatches() {
+        return matches;
+    }
+
     public List<Team> getTeams() {
-        List<Team> teams = new ArrayList<Team>();
+        List<Team> teams = new ArrayList<>();
+        teams.add(matches.get(0).getHomeTeam());
+        teams.add(matches.get(0).getGuestTeam());
+
         return teams;
     }
 }

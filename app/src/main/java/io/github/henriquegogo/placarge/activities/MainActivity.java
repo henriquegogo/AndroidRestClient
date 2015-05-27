@@ -35,7 +35,7 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
     private ListView teamsListView;
     private ListView matchesListView;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private List<Match> matches;
+    private Matches matches;
     private MatchesAdapter matchesAdapter;
     private List<Team> teams;
     private TeamsAdapter teamsAdapter;
@@ -80,20 +80,20 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
             sharedPreferencesEditor.putString(getString(R.string.matches_cache), output);
             sharedPreferencesEditor.apply();
 
-            matches = new Matches(output).matches;
+            matches = new Matches(output);
             showMatches(matches);
         }
         else if (matchesCache != null) {
-            matches = new Matches(matchesCache).matches;
+            matches = new Matches(matchesCache);
             showMatches(matches);
         }
     }
 
-    private void showMatches(List<Match> matches) {
-        matchesAdapter = new MatchesAdapter(getApplicationContext().getApplicationContext(), R.layout.layout_match_item, matches);
+    private void showMatches(Matches matches) {
+        matchesAdapter = new MatchesAdapter(getApplicationContext().getApplicationContext(), R.layout.layout_match_item, matches.getMatches());
         matchesListView.setAdapter(matchesAdapter);
 
-        teams = new ArrayList<>();
+        teams = matches.getTeams();
         showTeams(teams);
     }
 
