@@ -24,4 +24,9 @@ public class Matches {
             e.printStackTrace();
         }
     }
+
+    public List<Team> getTeams() {
+        List<Team> teams = new ArrayList<Team>();
+        return teams;
+    }
 }
