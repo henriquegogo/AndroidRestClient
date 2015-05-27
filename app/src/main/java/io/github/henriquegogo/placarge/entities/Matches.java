@@ -31,9 +31,15 @@ public class Matches {
 
     public List<Team> getTeams() {
         List<Team> teams = new ArrayList<>();
-        teams.add(matches.get(0).getHomeTeam());
-        teams.add(matches.get(0).getGuestTeam());
+
+        for (int i = 0; i < matches.size(); i++) {
+            Match match = matches.get(i);
+            teams.add(match.getHomeTeam());
+            teams.add(match.getGuestTeam());
+        }
 
         return teams;
     }
 }
+
+//
