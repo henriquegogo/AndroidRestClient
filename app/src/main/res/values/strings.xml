@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Placar GE</string>
-    <string name="action_refresh">Atualizar</string>
+    <string name="action_teams_list">Por time</string>
     <string name="title_activity_match_preview">TEMPO REAL</string>
     <string name="match_link_label">LINK</string>
     <string name="matches_cache">MATCH_CACHE</string>

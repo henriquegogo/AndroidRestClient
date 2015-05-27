@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +26,7 @@ import io.github.henriquegogo.placarge.entities.Matches;
 public class MainActivity extends ActionBarActivity implements AsyncTaskResponse {
     public static final String MATCH_LINK_URL_STRING = "http://matchesjson.herokuapp.com/matches.json";
     private ListView matchesListView;
+    SwipeRefreshLayout swipeRefreshLayout;
     private List<Match> matches;
     private MatchesAdapter matchesAdapter;
 
@@ -34,12 +37,15 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
 
         matchesListView = (ListView) findViewById(R.id.matchesListView);
         matchesListView.setOnItemClickListener(onClickMatchListener);
+
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.matchesRefresh);
+        swipeRefreshLayout.setOnRefreshListener(onRefreshListener);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        new ConnectionProxy(this).execute(MATCH_LINK_URL_STRING);
+        loadMatches();
     }
 
     @Override
@@ -50,8 +56,7 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_refresh) {
-            new ConnectionProxy(this).execute(MATCH_LINK_URL_STRING);
+        if (item.getItemId() == R.id.action_teams_list) {
             return true;
         }
 
@@ -60,6 +65,8 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
 
     @Override
     public void onAsyncTaskFinish(String output) {
+        swipeRefreshLayout.setRefreshing(false);
+
         SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
         String matchesCache = sharedPreferences.getString(String.valueOf(R.string.matches_cache), null);
 
@@ -82,6 +89,11 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
         matchesListView.setAdapter(matchesAdapter);
     }
 
+    private void loadMatches() {
+        swipeRefreshLayout.setRefreshing(true);
+        new ConnectionProxy(this).execute(MATCH_LINK_URL_STRING);
+    }
+
     OnItemClickListener onClickMatchListener = new OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -89,6 +101,13 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
             Intent intent = new Intent(getApplicationContext(), MatchPreviewActivity.class);
             intent.putExtra(getString(R.string.match_link_label), matchSelected.getLink());
             startActivity(intent);
+        }
+    };
+
+    OnRefreshListener onRefreshListener = new OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            loadMatches();
         }
     };
 }

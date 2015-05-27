@@ -5,11 +5,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ListView
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/matchesListView"
-        tools:listitem="layout_match_item"
-        android:background="#ffffffff" />
+        android:id="@+id/matchesRefresh">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/matchesListView"
+            tools:listitem="layout_match_item"
+            android:background="#ffffffff" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>
