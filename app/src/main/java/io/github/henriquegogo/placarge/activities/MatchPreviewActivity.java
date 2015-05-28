@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import io.github.henriquegogo.placarge.R;
 
@@ -22,6 +23,14 @@ public class MatchPreviewActivity extends ActionBarActivity {
         webView = (WebView) findViewById(R.id.webView);
         webView.setHorizontalScrollBarEnabled(false);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return false;
+            }
+        });
+
         webView.loadUrl(link);
     }
 }

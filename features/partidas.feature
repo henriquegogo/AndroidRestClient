@@ -3,7 +3,6 @@ Feature: Listar partidas
   Scenario: Como usuário eu devo acessar a tela inicial
     Given I am on matches screen
     Then I should see "Placar GE"
-    And I should see "Atualizar"
 
   Scenario: Como usuário eu devo visualizar as partidas
     Given I am on matches screen
