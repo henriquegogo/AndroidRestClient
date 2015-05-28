@@ -9,14 +9,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.github.henriquegogo.placarge.AsyncTaskResponse;
@@ -47,7 +45,6 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
 
         teamsListView = (ListView) findViewById(R.id.teamsListView);
         teamsListView.setOnItemClickListener(onClickTeamListener);
@@ -67,6 +64,21 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
     protected void onStart() {
         super.onStart();
         loadMatches();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
     }
 
     @Override
