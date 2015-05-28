@@ -4,14 +4,14 @@ import android.test.InstrumentationTestCase;
 
 public class ConnectionProxyTest extends InstrumentationTestCase {
 
-    public void testSetAsyncTaskResponse() {
-        AsyncTaskResponse asyncTaskResponse = new AsyncTaskResponse() {
+    public void testSetConnectionProxyResponse() {
+        ConnectionProxyResponse connectionProxyResponse = new ConnectionProxyResponse() {
             @Override
-            public void onAsyncTaskFinish(String output) { }
+            public void onConnectionProxyFinish(String output) { }
         };
 
-        ConnectionProxy connectionProxy = new ConnectionProxy(asyncTaskResponse);
+        ConnectionProxy connectionProxy = new ConnectionProxy(connectionProxyResponse);
 
-        assertEquals(asyncTaskResponse, connectionProxy.asyncTaskResponse);
+        assertEquals(connectionProxyResponse, connectionProxy.connectionProxyResponse);
     }
 }

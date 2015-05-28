@@ -12,10 +12,10 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 public class ConnectionProxy extends AsyncTask<String, Void, String> {
-    public AsyncTaskResponse asyncTaskResponse = null;
+    public ConnectionProxyResponse connectionProxyResponse = null;
 
-    public ConnectionProxy(AsyncTaskResponse asyncTaskResponse) {
-        this.asyncTaskResponse = asyncTaskResponse;
+    public ConnectionProxy(ConnectionProxyResponse connectionProxyResponse) {
+        this.connectionProxyResponse = connectionProxyResponse;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class ConnectionProxy extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String output) {
-        asyncTaskResponse.onAsyncTaskFinish(output);
+        connectionProxyResponse.onConnectionProxyFinish(output);
     }
 
     private String getStringFromStream(InputStream inputStream) throws IOException {

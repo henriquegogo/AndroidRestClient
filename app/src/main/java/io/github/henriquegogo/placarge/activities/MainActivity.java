@@ -1,9 +1,8 @@
 package io.github.henriquegogo.placarge.activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
@@ -17,7 +16,7 @@ import android.widget.ListView;
 
 import java.util.List;
 
-import io.github.henriquegogo.placarge.AsyncTaskResponse;
+import io.github.henriquegogo.placarge.ConnectionProxyResponse;
 import io.github.henriquegogo.placarge.ConnectionProxy;
 import io.github.henriquegogo.placarge.MatchesAdapter;
 import io.github.henriquegogo.placarge.R;
@@ -26,8 +25,9 @@ import io.github.henriquegogo.placarge.entities.Match;
 import io.github.henriquegogo.placarge.entities.Matches;
 import io.github.henriquegogo.placarge.entities.Team;
 
-public class MainActivity extends ActionBarActivity implements AsyncTaskResponse {
+public class MainActivity extends ActionBarActivity implements ConnectionProxyResponse {
     public static final String MATCH_LINK_URL_STRING = "http://matchesjson.herokuapp.com/matches.json";
+    public static final String CACHE_MATCHES_STRING = "CACHE_MATCHES_STRING";
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private ListView teamsListView;
@@ -63,7 +63,7 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
     @Override
     protected void onStart() {
         super.onStart();
-        loadMatches();
+        loadMatchesFromCache();
     }
 
     @Override
@@ -81,10 +81,35 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
     }
 
     @Override
-    public void onAsyncTaskFinish(String output) {
+    public void onConnectionProxyFinish(String output) {
         swipeRefreshLayout.setRefreshing(false);
-        matches = new Matches(output);
-        showMatches(matches);
+
+        if (output != null && !output.isEmpty()) {
+            setCacheMatchesString(output);
+            matches = new Matches(output);
+            showMatches(matches);
+
+        }
+        else if (!getCacheMatchesString().isEmpty()) {
+            loadMatchesFromCache();
+        }
+    }
+
+    private void loadMatchesFromCache() {
+        String cacheMatchesString = getCacheMatchesString();
+
+        if (cacheMatchesString != null && !cacheMatchesString.isEmpty()) {
+            matches = new Matches(cacheMatchesString);
+            showMatches(matches);
+
+        } else {
+            loadMatches();
+        }
+    }
+
+    private void loadMatches() {
+        swipeRefreshLayout.setRefreshing(true);
+        new ConnectionProxy(this).execute(MATCH_LINK_URL_STRING);
     }
 
     private void showMatches(Matches matches) {
@@ -100,9 +125,18 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
         teamsListView.setAdapter(teamsAdapter);
     }
 
-    private void loadMatches() {
-        swipeRefreshLayout.setRefreshing(true);
-        new ConnectionProxy(this).execute(MATCH_LINK_URL_STRING);
+    private void setCacheMatchesString(String matchesString) {
+        PreferenceManager
+                .getDefaultSharedPreferences(getBaseContext()).edit()
+                .putString(CACHE_MATCHES_STRING, matchesString).commit();
+    }
+
+    private String getCacheMatchesString() {
+        String matchesString = PreferenceManager
+                .getDefaultSharedPreferences(getBaseContext())
+                .getString(CACHE_MATCHES_STRING, "");
+
+        return matchesString;
     }
 
     OnItemClickListener onClickTeamListener = new OnItemClickListener() {
@@ -110,7 +144,7 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             teamSelected = (Team) parent.getAdapter().getItem(position);
             drawerLayout.closeDrawers();
-            loadMatches();
+            loadMatchesFromCache();
         }
     };
 
