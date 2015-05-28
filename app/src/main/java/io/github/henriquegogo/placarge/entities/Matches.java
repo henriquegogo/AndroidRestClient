@@ -25,14 +25,30 @@ public class Matches {
         }
     }
 
-    public List<Match> getMatches() {
-        return matches;
+    public List<Match> getMatches(Team... teams) {
+        if (teams.length > 0 && teams[0] != null) {
+            Team team = teams[0];
+            List<Match> matchesFiltered = new ArrayList<>();
+
+            for (int i = 0; i < matches.size(); i++) {
+                Match match = matches.get(i);
+                if (match.getHomeTeam().getId() == team.getId() ||
+                    match.getGuestTeam().getId() == team.getId())
+                    matchesFiltered.add(match);
+            }
+
+            return matchesFiltered;
+
+        } else {
+            return matches;
+        }
     }
 
     public List<Team> getTeams() {
         List<Team> teams = new ArrayList<>();
         List<Long> teamIds = new ArrayList<>();
 
+        // Deveria ser feito com lambda expression, caso a versão do Java suportasse.
         for (int i = 0; i < matches.size(); i++) {
             Match match = matches.get(i);
             Team homeTeam = match.getHomeTeam();

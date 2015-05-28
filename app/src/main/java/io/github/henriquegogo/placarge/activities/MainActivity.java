@@ -39,6 +39,7 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
     private MatchesAdapter matchesAdapter;
     private List<Team> teams;
     private TeamsAdapter teamsAdapter;
+    private Team teamSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,9 +91,9 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
     }
 
     private void showMatches(Matches matches) {
-        matchesAdapter = new MatchesAdapter(getApplicationContext().getApplicationContext(), R.layout.layout_match_item, matches.getMatches());
+        List<Match> matchesList = matches.getMatches(teamSelected);
+        matchesAdapter = new MatchesAdapter(getApplicationContext().getApplicationContext(), R.layout.layout_match_item, matchesList);
         matchesListView.setAdapter(matchesAdapter);
-
         teams = matches.getTeams();
         showTeams(teams);
     }
@@ -102,7 +103,8 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
         teamsListView.setAdapter(teamsAdapter);
     }
 
-    private void loadMatches() {
+    private void loadMatches(Team... teams) {
+        this.teamSelected = (teams.length > 0 && teams[0] != null) ? teams[0] : null;
         swipeRefreshLayout.setRefreshing(true);
         new ConnectionProxy(this).execute(MATCH_LINK_URL_STRING);
     }
@@ -110,7 +112,9 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
     OnItemClickListener onClickTeamListener = new OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+            Team teamSelected = (Team) parent.getAdapter().getItem(position);
+            drawerLayout.closeDrawers();
+            loadMatches(teamSelected);
         }
     };
 
