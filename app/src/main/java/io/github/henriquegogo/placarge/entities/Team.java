@@ -4,7 +4,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Team {
-    private JSONObject teamJsonObject;
     private long id;
     private String hexColor;
     private String name;
@@ -12,8 +11,6 @@ public class Team {
     private String largeShield;
 
     public Team(JSONObject teamJsonObject) throws JSONException {
-        this.teamJsonObject = teamJsonObject;
-
         this.id = teamJsonObject.getLong("id");
         this.hexColor = teamJsonObject.getString("color");
         this.name = teamJsonObject.getString("name");

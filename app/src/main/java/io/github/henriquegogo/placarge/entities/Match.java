@@ -4,7 +4,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Match {
-    private JSONObject matchJsonObject;
     private long id;
     private Team homeTeam;
     private Team guestTeam;
@@ -15,8 +14,6 @@ public class Match {
     private String link;
 
     public Match(JSONObject matchJsonObject) throws JSONException {
-        this.matchJsonObject = matchJsonObject;
-
         this.id = matchJsonObject.getLong("id");
         this.homeScore = matchJsonObject.getLong("home_team_score");
         this.guestScore = matchJsonObject.getLong("guest_team_score");
