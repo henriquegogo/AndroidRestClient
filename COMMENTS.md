@@ -10,3 +10,6 @@ Para executá-los é necessário instalar o calabash conforme as instruções em
 https://github.com/calabash/calabash-android/blob/master/documentation/installation.md
 e ter previamente buildado a aplicação.
 Após as etapas acima concluídas, basta executar o script: ./runCalabashTests.sh
+
+A lista das partidas é salva e sempre carregada a partir do aparelho, para evitar requisições desnecessárias ao servidor.
+Caso o usuário queira atualizar e assim fazer a requisição, ele pode fazer fazendo um swipe-refresh (scrollando para cima).
