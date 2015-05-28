@@ -71,7 +71,6 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -84,22 +83,8 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
     @Override
     public void onAsyncTaskFinish(String output) {
         swipeRefreshLayout.setRefreshing(false);
-
-        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-        String matchesCache = sharedPreferences.getString(String.valueOf(R.string.matches_cache), null);
-
-        if (output != null) {
-            SharedPreferences.Editor sharedPreferencesEditor = getPreferences(Context.MODE_PRIVATE).edit();
-            sharedPreferencesEditor.putString(getString(R.string.matches_cache), output);
-            sharedPreferencesEditor.apply();
-
-            matches = new Matches(output);
-            showMatches(matches);
-        }
-        else if (matchesCache != null) {
-            matches = new Matches(matchesCache);
-            showMatches(matches);
-        }
+        matches = new Matches(output);
+        showMatches(matches);
     }
 
     private void showMatches(Matches matches) {
@@ -115,8 +100,7 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
         teamsListView.setAdapter(teamsAdapter);
     }
 
-    private void loadMatches(Team... teams) {
-        this.teamSelected = (teams.length > 0 && teams[0] != null) ? teams[0] : null;
+    private void loadMatches() {
         swipeRefreshLayout.setRefreshing(true);
         new ConnectionProxy(this).execute(MATCH_LINK_URL_STRING);
     }
@@ -124,9 +108,9 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
     OnItemClickListener onClickTeamListener = new OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Team teamSelected = (Team) parent.getAdapter().getItem(position);
+            teamSelected = (Team) parent.getAdapter().getItem(position);
             drawerLayout.closeDrawers();
-            loadMatches(teamSelected);
+            loadMatches();
         }
     };
 
@@ -143,6 +127,7 @@ public class MainActivity extends ActionBarActivity implements AsyncTaskResponse
     OnRefreshListener onRefreshListener = new OnRefreshListener() {
         @Override
         public void onRefresh() {
+            teamSelected = null;
             loadMatches();
         }
     };
