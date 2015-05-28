@@ -31,11 +31,18 @@ public class Matches {
 
     public List<Team> getTeams() {
         List<Team> teams = new ArrayList<>();
+        List<Long> teamIds = new ArrayList<>();
 
         for (int i = 0; i < matches.size(); i++) {
             Match match = matches.get(i);
-            teams.add(match.getHomeTeam());
-            teams.add(match.getGuestTeam());
+            Team homeTeam = match.getHomeTeam();
+            Team guestTeam = match.getGuestTeam();
+
+            if (!teamIds.contains(homeTeam.getId())) teams.add(homeTeam);
+            if (!teamIds.contains(guestTeam.getId())) teams.add(guestTeam);
+
+            teamIds.add(homeTeam.getId());
+            teamIds.add(guestTeam.getId());
         }
 
         return teams;
