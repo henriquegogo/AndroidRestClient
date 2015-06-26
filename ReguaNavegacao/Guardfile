@@ -1,0 +1,11 @@
+
+
+guard 'livereload' do
+  watch(%r{build/stylesheets/.+\.css})
+  watch(%r{build/js/.+\.js})
+  watch(%r{.+\.html})
+end
+
+guard :shell do
+  watch(/src\/(js|stylesheets)\/(.*)\.(scss|js)/) {|m| `ruby compile.rb` }
+end

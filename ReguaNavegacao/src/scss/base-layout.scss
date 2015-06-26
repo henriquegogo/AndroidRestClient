@@ -1,0 +1,251 @@
+// ESSA ESTRUTURA É USADA PARA O LAYOUT BASE DA MATÉRIA DO G1. FAVOR NÃO ALTERAR.
+
+html {
+  font-size: 62.5%
+}
+
+body {
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, Sans-Serif;
+  font-size: 1.6rem;
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -ms-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  font-smoothing: antialiased
+}
+
+a {
+  text-decoration: none
+}
+
+article {
+  margin: 3rem auto;
+  max-width: 96rem;
+  padding: 0 3rem
+}
+
+article h1 {
+  color: #333;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -.2rem;
+  line-height: 1.1;
+  margin-bottom: 2rem
+}
+
+@media screen and (min-width: 720px) and (max-width: 960px) {
+  article h1 {
+    font-size: 4.167vw
+  }
+}
+
+@media screen and (min-width: 615px) and (max-width: 960px) {
+  article h1 {
+    letter-spacing: -.325vw
+  }
+}
+
+@media screen and (min-width: 960px) {
+  article h1 {
+    font-size: 4rem;
+    letter-spacing: -.3rem
+  }
+}
+
+article h2 {
+  border-bottom: .1rem solid #ddd;
+  color: #666;
+  font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, Arial, Sans-Serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1.4;
+  margin-bottom: 3rem;
+  padding-bottom: 3rem
+}
+
+@media screen and (max-width: 960px) {
+  article h2 {
+    letter-spacing: -.104vw
+  }
+}
+
+@media screen and (min-width: 720px) and (max-width: 960px) {
+  article h2 {
+    font-size: 2.5vw
+  }
+}
+
+@media screen and (min-width: 960px) {
+  article h2 {
+    font-size: 2.4rem;
+    letter-spacing: -.1rem
+  }
+}
+
+article p {
+  font-size: 1.6rem;
+  margin-bottom: 2rem
+}
+
+.header {
+  background-color: #a90400;
+  box-shadow: inset 0 -.3rem 0 rgba(0, 0, 0, .15)
+}
+
+.header .container {
+  background-color: transparent;
+  height: 5rem;
+  margin: 0 auto;
+  max-width: 100rem;
+  position: relative;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d
+}
+
+@media screen and (min-width: 640px) and (max-width: 896px) {
+  .header .container {
+    height: 7.8137vw
+  }
+}
+
+@media screen and (min-width: 896px) {
+  .header .container {
+    height: 7rem
+  }
+}
+
+.logo {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  width: 3.6rem;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%)
+}
+
+@media screen and (min-width: 640px) and (max-width: 924px) {
+  .logo {
+    width: 5.625vw
+  }
+}
+
+@media screen and (min-width: 924px) {
+  .logo {
+    width: 5.2rem
+  }
+}
+
+.burguer-icon {
+  left: 3rem;
+  transform: translateY(-50%)
+}
+
+.burguer-icon, .lupa-icon {
+  position: absolute;
+  top: 50%;
+  width: 2rem;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  cursor: pointer;
+  opacity: .5;
+  -webkit-transition: opacity .2s ease;
+  -moz-transition: opacity .2s ease;
+  -ms-transition: opacity .2s ease;
+  -o-transition: opacity .2s ease;
+  transition: opacity .2s ease
+}
+
+.busca input, .lupa-icon {
+  transform: translateY(-50%)
+}
+
+.lupa-icon {
+  right: 3rem
+}
+
+.busca, .busca input {
+  height: 5rem;
+  width: 100%
+}
+
+.header .lupa-icon path {
+  fill: #fff
+}
+
+.burguer-icon:hover, .lupa-icon:hover {
+  opacity: 1
+}
+
+.busca {
+  margin: 0 auto;
+  position: relative;
+  top: 0;
+  z-index: 2;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -ms-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease
+}
+
+.busca input {
+  background-color: rgba(255, 255, 255, .5);
+  border-radius: 0;
+  border-width: 0;
+  box-sizing: border-box;
+  color: #999;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, Sans-Serif;
+  font-size: 1.6rem;
+  letter-spacing: -.1rem;
+  outline: 0;
+  padding-left: 4.5rem;
+  top: 50%;
+  -webkit-transition: border-radius .5s ease, background-color .3s ease;
+  -moz-transition: border-radius .5s ease, background-color .3s ease;
+  -ms-transition: border-radius .5s ease, background-color .3s ease;
+  -o-transition: border-radius .5s ease, background-color .3s ease;
+  transition: border-radius .5s ease, background-color .3s ease
+}
+
+.busca input, .lupa-da-busca {
+  position: absolute;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%)
+}
+
+.busca input:focus, .busca input:hover {
+  background-color: #fff
+}
+
+@media screen and (min-width: 640px) {
+  .busca {
+    top: 3rem;
+    width: 58rem
+  }
+  .busca input {
+    border-radius: 2.5rem
+  }
+}
+
+.lupa-da-busca {
+  height: 1.6rem;
+  left: 2rem;
+  opacity: .3;
+  top: 50%;
+  width: 1.6rem;
+  z-index: 2;
+  transform: translateY(-50%)
+}

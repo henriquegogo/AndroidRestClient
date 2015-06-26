@@ -1,0 +1,1 @@
+(function(){var n,o;n=function(){function n(){console.log("Hello World")}return n}(),o=function(){return new n},document.addEventListener("DOMContentLoaded",o,!1)}).call(this),function(){var n,o;n=function(){function n(){console.log("Hello World Js")}return n}(),o=function(){new n},document.addEventListener("DOMContentLoaded",o,!1)}.call(this);
