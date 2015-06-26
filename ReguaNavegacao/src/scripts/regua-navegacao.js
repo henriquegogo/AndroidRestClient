@@ -11,19 +11,28 @@
       function obterDados() {
         var products_key = "products";
         var sprites_key = "sprites";
+        var update_key = "update_time";
 
         var products = localStorage.getItem(products_key);
         var sprites = localStorage.getItem(sprites_key);
+        var update_time = localStorage.getItem(update_key);
+        var time_now = new Date().getTime();
 
-        if (products && sprites) {
+        var expired = ((time_now - update_time) / 1000) > 5; // 5 segundos de cache
+
+        if (!expired && products && sprites) {
+            console.log("Cached");
             exibirDados(JSON.parse(products), sprites);
         }
         else {
+            console.log("Requisitando...");
+
             $.when( $.get("https://matchesjson.herokuapp.com/products.json"),
                     $.get("/sprites.svg") ).done(function(products, sprites) {
        
               localStorage.setItem(products_key, JSON.stringify(products[0]));
               localStorage.setItem(sprites_key, sprites[0]);
+              localStorage.setItem(update_key, new Date().getTime());
               
               exibirDados(products[0], sprites[0]);
             });
