@@ -16,3 +16,7 @@ end
 get '/' do
   erb :index
 end
+
+get '/sprites.svg' do
+  erb :sprites
+end

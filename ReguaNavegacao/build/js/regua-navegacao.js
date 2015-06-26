@@ -24,23 +24,27 @@
     ReguaNavegacao = (function() {
       function ReguaNavegacao() {
         console.log("Hello World Js");
-        
+
         obterDados();
       }
 
       function obterDados() {
-        $.get("https://matchesjson.herokuapp.com/products.json").done(function(resp) {
-          exibirDados(resp);
+        $.when( $.get("https://matchesjson.herokuapp.com/products.json"),
+                $.get("/sprites.svg") ).done(function(products, sprites) {
+
+          exibirDados(products[0], sprites[0]);
         });
       }
 
-      function exibirDados(resp) {
+      function exibirDados(products, sprites) {
         var reguaElement = $("#regua-navegacao");
         console.log("Exibindo dados");
 
-        for (item in resp) {
-          var itemData = resp[item];
-          var itemIcon = $("#icone-logo-"+item);
+        for (item in products) {
+          var itemData = products[item];
+          var spritesElements = $("<div>").html(sprites);
+          var itemIcon = spritesElements.find("#icone-logo-"+item);
+          console.log(itemIcon);
           
           var itemElement = $("<a>");
           itemElement.attr("href", itemData.link)

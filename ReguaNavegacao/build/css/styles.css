@@ -36,6 +36,7 @@
   background: red;
   border: 1px solid #AAA;
   border-right: none;
+  box-sizing: border-box;
 }
 
 .regua-navegacao-item svg {
