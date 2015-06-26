@@ -29,11 +29,25 @@
       }
 
       function obterDados() {
-        $.when( $.get("https://matchesjson.herokuapp.com/products.json"),
-                $.get("/sprites.svg") ).done(function(products, sprites) {
+        var products_key = "products";
+        var sprites_key = "sprites";
 
-          exibirDados(products[0], sprites[0]);
-        });
+        var products = localStorage.getItem(products_key);
+        var sprites = localStorage.getItem(sprites_key);
+
+        if (products && sprites) {
+            exibirDados(JSON.parse(products), sprites);
+        }
+        else {
+            $.when( $.get("https://matchesjson.herokuapp.com/products.json"),
+                    $.get("/sprites.svg") ).done(function(products, sprites) {
+       
+              localStorage.setItem(products_key, JSON.stringify(products[0]));
+              localStorage.setItem(sprites_key, sprites[0]);
+              
+              exibirDados(products[0], sprites[0]);
+            });
+        }
       }
 
       function exibirDados(products, sprites) {
@@ -44,7 +58,6 @@
           var itemData = products[item];
           var spritesElements = $("<div>").html(sprites);
           var itemIcon = spritesElements.find("#icone-logo-"+item);
-          console.log(itemIcon);
           
           var itemElement = $("<a>");
           itemElement.attr("href", itemData.link)
