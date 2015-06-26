@@ -1,3 +1,5 @@
+$cinza: #aaa;
+
 .white{
   color: white;
 }
@@ -31,14 +33,14 @@
   height: 100%;
   line-height: 65px;
   text-align: center;
-  background: red;
-  border: 1px solid #AAA;
+  background: white;
+  border: 1px solid $cinza;
   border-right: none;
   box-sizing: border-box;
-}
 
-.regua-navegacao-item svg {
-  max-width: 55px;
-  max-height: 25px;
-  fill: white;
+  svg {
+    max-width: 55px;
+    max-height: 25px;
+    fill: white;
+  }
 }

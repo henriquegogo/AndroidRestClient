@@ -38,7 +38,7 @@
         var update_time = localStorage.getItem(update_key);
         var time_now = new Date().getTime();
 
-        var expired = ((time_now - update_time) / 1000) > 5;
+        var expired = ((time_now - update_time) / 1000) > 5; // 5 segundos de cache
 
         if (!expired && products && sprites) {
             console.log("Cached");
