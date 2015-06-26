@@ -1,1 +1,45 @@
-.white{color:#fff}
+.white {
+  color: white;
+}
+
+#page-content {
+  margin-bottom: 50px;
+}
+
+#regua-navegacao {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: white;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+#regua-navegacao::-webkit-scrollbar {
+  display: none;
+}
+
+#regua-navegacao-icons {
+  display: none;
+}
+
+.regua-navegacao-item {
+  display: inline-block;
+  position: relative;
+  width: 100px;
+  height: 100%;
+  line-height: 65px;
+  text-align: center;
+  background: red;
+  border: 1px solid #AAA;
+  border-right: none;
+}
+
+.regua-navegacao-item svg {
+  max-width: 55px;
+  max-height: 25px;
+  fill: white;
+}
